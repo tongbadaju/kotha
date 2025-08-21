@@ -1,0 +1,45 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+*.pyd
+
+# Django
+*.sqlite3
+*.log
+local_settings.py
+db.sqlite3
+media/
+staticfiles/
+
+# Environment
+.env
+venv/
+env/
+.venv/
+
+# PyCharm / VSCode
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+
+# Django migrations (optional)
+*/migrations/*.pyc
+*/migrations/*.py[cod]
+*/migrations/__pycache__/
+
+# Media Files
+media/
