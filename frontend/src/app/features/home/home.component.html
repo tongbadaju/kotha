@@ -127,27 +127,30 @@
     The best solutions in the coolest cities, you just need to book.
   </p>
 
-  <div class="grid sm:grid-cols-3 w-full lg:grid-cols-5 items-center gap-2">
-    <a *ngFor="let city of cities" 
-       [href]="city.link" 
-       class="flex flex-col group bg-[var(--color-secondary)] shadow-2xs rounded-xl overflow-hidden hover:shadow-lg focus:outline-hidden focus:shadow-lg transition">
+  <div class="grid sm:grid-cols-3 lg:grid-cols-5 w-full gap-4">
+    <a *ngFor="let city of cities"
+      [href]="city.link"
+      class="flex flex-col group bg-[var(--color-secondary)] shadow-2xs rounded-xl overflow-hidden hover:shadow-lg focus:outline-hidden focus:shadow-lg transition h-full">
 
-      <div class="relative pt-[50%] sm:pt-[60%] lg:pt-[80%] rounded-t-xl overflow-hidden">
-        <img class="size-full absolute top-0 start-0 object-cover group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl" 
-             [src]="city.img" 
-             [alt]="city.title">
+      <!-- Image container -->
+      <div class="relative w-full aspect-[4/3] overflow-hidden rounded-t-xl">
+        <img class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out"
+            [src]="city.img"
+            [alt]="city.title">
       </div>
 
-      <div class="p-4 md:p-5">
+      <!-- Content -->
+      <div class="p-4 md:p-5 flex-1 flex flex-col">
         <h3 class="text-lg font-bold text-gray-800">{{ city.title }}</h3>
-        <p class="mt-1 text-gray-500">{{ city.description }}</p>
+        <p class="mt-1 text-gray-500 flex-1">{{ city.description }}</p>
       </div>
     </a>
   </div>
+
 </section>
 
 <!-- Icon Blocks -->
-<section class="flex flex-col items-start bg-[var(--color-secondary)] py-15 px-10 sm:px-15 lg:px-25">
+<section class="flex flex-col items-start py-15 px-10 sm:px-15 lg:px-25">
 
   <div class="heading text-3xl sm:text-5xl font-semibold text-gray-800 mb-15">
     Why book with us
@@ -192,3 +195,4 @@
   </div>
 </section>
 <!-- End Icon Blocks -->
+
