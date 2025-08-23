@@ -1,39 +1,58 @@
 import { Routes } from '@angular/router';
+
 import { HomeComponent } from './features/home/home.component';
 import { PageNotFoundComponent } from './shared/models/components/page-not-found/page-not-found.component';
 import { AboutComponent } from './features/about/about.component';
 import { PropertyComponent } from './features/property/property.component';
 import { DetailComponent } from './features/property/detail/detail.component';
 
+import { AuthGuard } from './core/guards/auth.guard';
+import { RoleGuard } from './core/guards/role.guard';
+
 export const routes: Routes = [
-    {
-        path: '',
-        component: HomeComponent,
-    },
 
-    {
-        path: 'about/:section',
-        component: AboutComponent,
-        
-    },
+    // Home
+    { path: '', component: HomeComponent },
 
+    // Property listing & detail
     {
         path: 'property',
         children: [
-        {
-            path: 'all',
-            component: PropertyComponent, // list view
-        },
-        {
-            path: ':id',
-            component: DetailComponent, // detail view
-        },
+        { path: 'all', component: PropertyComponent },
+        { path: ':id', component: DetailComponent },
         ],
     },
 
-    // Wildcard fallback
+
+    // Dashboards
     {
-        path: '**',
-        component: PageNotFoundComponent
-    }
+        path: 'dashboard',
+        canActivate: [AuthGuard],
+        children: [
+        {
+            path: 'user',
+            canActivate: [RoleGuard],
+            data: { roles: ['user'] },
+            loadComponent: () =>
+            import('./features/dashboard/user-dashboard/user-dashboard.component')
+                .then(m => m.UserDashboardComponent)
+        },
+        {
+            path: 'admin',
+            canActivate: [RoleGuard],
+            data: { roles: ['employee', 'admin'] },
+            loadComponent: () =>
+            import('./features/dashboard/admin-dashboard/admin-dashboard.component')
+                .then(m => m.AdminDashboardComponent)
+        },
+        { path: '', redirectTo: 'user', pathMatch: 'full' }
+        ]
+    },
+
+    // About pages
+    { path: 'about/:section', component: AboutComponent },
+
+    // Wildcard fallback
+    { path: '403', component: PageNotFoundComponent },
+    { path: '**', component: PageNotFoundComponent }
 ];

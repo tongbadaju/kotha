@@ -1,0 +1,91 @@
+<div>
+  <div class="text-center mb-8">
+    <h1 class="block text-2xl font-bold text-gray-800 mt-6">Sign in</h1>
+    <p class="mt-2 text-sm text-gray-600">
+      Don't have an account yet?
+      <a
+        class="text-[var(--color-primary)] hover:underline font-medium cursor-pointer"
+        (click)="onRegisterClick()"
+        >Sign up here</a
+      >
+    </p>
+  </div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="grid gap-y-4">
+      <!-- Phone -->
+      <div>
+        <label for="login-phone" class="block text-sm mb-2"
+          >Phone number</label
+        >
+        <input
+          type="tel"
+          id="login-phone"
+          formControlName="phone"
+          class="py-2.5 sm:py-3 px-4 w-full border rounded-lg bg-[var(--color-secondary)] focus:border-blue-500 focus:ring-blue-500"
+          [ngClass]="{ 'border-red-500': submitted && lf['phone'].invalid }"
+        />
+        <p *ngIf="submitted && lf['phone'].errors" class="text-xs text-red-600 mt-2">
+          <span *ngIf="lf['phone'].errors?.['required']"
+            >Phone number is required.</span
+          >
+          <span *ngIf="lf['phone'].errors?.['pattern']"
+            >Invalid phone format.</span
+          >
+        </p>
+      </div>
+
+      <!-- Password + Forgot Link -->
+      <div>
+        <div class="flex justify-between items-center mb-2">
+          <label for="login-password" class="block text-sm">Password</label>
+          <a
+            class="text-[var(--color-primary)] text-sm hover:underline cursor-pointer"
+            (click)="onForgotClick()"
+            >Forgot password?</a
+          >
+        </div>
+        <input
+          type="password"
+          id="login-password"
+          formControlName="password"
+          class="py-2.5 sm:py-3 px-4 w-full border rounded-lg bg-[var(--color-secondary)] focus:border-blue-500 focus:ring-blue-500"
+          [ngClass]="{ 'border-red-500': submitted && lf['password'].invalid }"
+        />
+        <p *ngIf="submitted && lf['password'].errors" class="text-xs text-red-600 mt-2">
+          <span *ngIf="lf['password'].errors?.['required']"
+            >Password is required.</span
+          >
+          <span *ngIf="lf['password'].errors?.['minlength']"
+            >Must be at least 8 characters.</span
+          >
+        </p>
+      </div>
+
+      <!-- Server Error -->
+      <div *ngIf="serverError" class="mt-2 bg-red-100 text-sm text-red-700 rounded-lg p-4" role="alert" tabindex="-1" aria-labelledby="hs-soft-color-danger-label">
+        <span>{{ serverError }}</span>
+      </div>
+      
+      <!-- Submit -->
+      <button
+        type="submit"
+        [disabled]="loading"
+        class="w-full py-3 px-4 text-white rounded-lg bg-[var(--color-primary)] hover:bg-[var(--color-primary-elevated)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+      >
+        <!-- When not loading, show text -->
+        <span *ngIf="!loading">Sign in</span>
+
+        <!-- When loading, show your spinner -->
+        <div
+          *ngIf="loading"
+          class="animate-spin inline-block size-6 border-3 border-current border-t-transparent text-white rounded-full"
+          role="status"
+          aria-label="loading"
+        >
+          <span class="sr-only">Signing in...</span>
+        </div>
+      </button>
+    </div>
+  </form>
+</div>

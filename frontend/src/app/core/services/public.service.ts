@@ -10,23 +10,23 @@ import { Property } from '../models/property.model';
 })
 
 export class PublicService {
-  private baseUrl = environment.apiBaseUrl;
+  private apiUrl = environment.apiBaseUrl;
 
   constructor(private http: HttpClient) {}
 
   getTeamMembers(): Observable<TeamMember[]> {
-    return this.http.get<TeamMember[]>(`${this.baseUrl}/public/team/`);
+    return this.http.get<TeamMember[]>(`${this.apiUrl}/public/team/`);
   }
  
 
   //Property 
 
   getProperties(): Observable<Property[]> {
-    return this.http.get<Property[]>(`${this.baseUrl}/properties/`);
+    return this.http.get<Property[]>(`${this.apiUrl}/properties/`);
   }
 
   getProperty(id: number): Observable<Property> {
-    return this.http.get<Property>(`${this.baseUrl}/properties/${id}/`);
+    return this.http.get<Property>(`${this.apiUrl}/properties/${id}/`);
   }
 
 }

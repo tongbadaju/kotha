@@ -1,0 +1,31 @@
+<div class="p-6 max-w-md bg-[var(--color-secondary-elevated)] p-4 sm:p-7">
+    <img
+      src="assets/kotha_logo.svg"
+      alt="Logo"
+      class="h-9 w-full inline-block"
+    />
+  <ng-container [ngSwitch]="view">
+
+    <app-login
+      *ngSwitchCase="'login'"
+      (forgot)="view = 'forgot'"
+      (register)="view = 'register'"
+      (success)="close()"
+    >
+    </app-login>
+
+    <app-forgot-password
+      *ngSwitchCase="'forgot'"
+      (back)="view = 'login'"
+    >
+    </app-forgot-password>
+
+    <app-register
+      *ngSwitchCase="'register'"
+      (back)="view = 'login'"
+      (success)="view = 'login'"
+    >
+    </app-register>
+
+  </ng-container>
+</div>

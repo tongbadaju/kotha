@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NgClass, NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { PublicService } from '../../core/services/public.service';
 import { Property } from '../../core/models/property.model';
 
 @Component({
   selector: 'app-property',
-  imports: [NgClass, NgFor, RouterModule],
+  imports: [CommonModule, RouterModule,],
   templateUrl: './property.component.html',
   styleUrl: './property.component.scss'
 })
