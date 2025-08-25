@@ -26,14 +26,15 @@ export class AboutComponent {
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.section = params.get('section') || 'company';
+
       if (['terms-and-conditions', 'privacy-policy', 'about-company'].includes(this.section)) {
         this.loadMarkdown(this.section); 
       }
-    });
 
-    if (this.section === 'team') {
-      this.loadTeamMembers();
-    }
+      if (this.section === 'team') {
+        this.loadTeamMembers();
+      }
+    });
   }
 
   loadTeamMembers(): void {

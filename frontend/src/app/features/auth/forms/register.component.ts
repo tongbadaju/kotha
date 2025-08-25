@@ -10,7 +10,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth.service';
 import { Router } from '@angular/router';
-import { ConfirmDialogComponent, ConfirmDialogData } from '../../../shared/models/components/modal/confirm-dialog.component';
+import { ConfirmDialogComponent, ConfirmDialogData } from '../../../shared/components/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({

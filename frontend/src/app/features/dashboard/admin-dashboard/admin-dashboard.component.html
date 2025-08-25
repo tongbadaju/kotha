@@ -7,9 +7,12 @@
         <!-- Sidebar Toggle -->
         <button
         (click)="toggleSidebar()"
-        class="p-2 text-gray-700 hover:text-gray-900 focus:outline-none z-50"
+        class="p-2 text-gray-700 hover:text-gray-900 focus:outline-none z-50 cursor-pointer"
         >
-        <i class="fa fa-bars text-lg"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+
         </button>
 
     </header>
@@ -27,209 +30,117 @@
         <!-- Sidebar -->
         <aside
         [ngClass]="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
-        class="fixed inset-y-0 left-0 w-64 bg-[var(--color-secondary-elevated)] shadow-lg transform transition duration-300 ease-in-out z-50"
+        class="fixed inset-y-0 left-0 w-75 bg-[var(--color-secondary-elevated)] shadow-lg transform transition duration-300 ease-in-out z-50"
         >
             <!-- Header -->
-            <header class="p-3 flex justify-between items-center gap-2">
-                <a
-                href="#"
-                aria-label="Brand"
-                class="font-semibold text-xl text-black"
-                >
-                Kotha Admin
+            <header class="px-5 py-5 flex justify-between items-center gap-2">
+                <a routerLink="/" class="flex items-baseline gap-2.5">
+                    <img src="assets/kotha_logo.svg" alt="Logo" class="h-4 md:h-7 w-auto inline-block" />
+                    <span class="text-xl md:text-2xl font-semibold text-[var(--color-primary)] leading-none">kotha</span>
                 </a>
 
                 <!-- Close Button (mobile) -->
                 <button
                 *ngIf="sidebarOpen"
                 (click)="sidebarOpen = false"
-                class="p-1.5 text-sm bg-[var(--color-secondary)] border border-gray-200 rounded-full text-gray-600 hover:bg-neutral-200"
+                class="p-1.5 text-sm rounded-full text-gray-600 hover:bg-neutral-200"
                 aria-label="Close sidebar"
                 >
                 <i class="fas fa-times fa-lg"></i>
                 </button>
             </header>
 
-            <hr class="text-gray-300 mx-3"/>
+            <hr class="text-gray-300"/>
+            
+            <div class="px-5 py-3 flex bg-white items-center gap-2.5 text-gray-800 rounded-lg">
+                <div
+                    class="w-9 h-9 bg-[var(--color-primary)] rounded-full flex items-center justify-center">
+                    <span class="text-sm font-semibold text-white">
+                        {{ initials }}
+                    </span>
+                </div>
+
+                <p class="font-medium">{{ currentUser?.name }}</p>
+            </div>
+
+            <hr class="text-gray-300"/>
 
             <nav class="h-full overflow-y-auto px-2 pt-2">
                 <ul class="space-y-1">
-                    <!-- Dashboard Link -->
+                   
                     <li>
                         <a
-                        href="#"
-                        class="flex items-center gap-3 py-2 px-2.5 text-sm text-gray-800 bg-[var(--color-secondary)] rounded-lg hover:bg-gray-200"
+                        routerLink="/dashboard/admin/home"
+                        routerLinkActive="bg-gray-300 font-semibold"
+                        class="flex items-center gap-3 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-200"
                         >
                         <i class="fas fa-home fa-fw"></i>
                         <span>Dashboard</span>
                         </a>
                     </li>
 
-                    <!-- Account Accordion -->
                     <li>
-                        <button
-                        (click)="toggleAccount()"
-                        [attr.aria-expanded]="accountOpen"
-                        class="w-full text-left flex items-center gap-3 py-2 px-2.5 text-sm text-gray-800 bg-[var(--color-secondary)] rounded-lg hover:bg-neutral-200"
+                        <a
+                        href="#"
+                        class="flex items-center gap-3 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-200"
                         >
-                            <i class="fas fa-user-circle fa-fw"></i>
-                            <span>Account</span>
-                            <!-- Chevron changes direction -->
-                            <i
-                                class="ms-auto fas"
-                                [ngClass]="accountOpen ? 'fa-chevron-up' : 'fa-chevron-down'"
-                            ></i>
-                        </button>
-
-                        <!-- Sub-links -->
-                        <ul
-                        *ngIf="accountOpen"
-                        class="mt-1 pl-6 space-y-1"
-                        role="region"
-                        [attr.aria-hidden]="!accountOpen"
-                        >
-                            <li>
-                                <a
-                                href="#"
-                                class="block py-2 px-2.5 rounded-lg text-sm text-gray-800 hover:bg-neutral-100"
-                                >
-                                Link 1
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                href="#"
-                                class="block py-2 px-2.5 rounded-lg text-sm text-gray-800 hover:bg-neutral-100"
-                                >
-                                Link 2
-                                </a>
-                            </li>
-                            <li>
-                                <a
-                                href="#"
-                                class="block py-2 px-2.5 rounded-lg text-sm text-gray-800 hover:bg-neutral-100"
-                                >
-                                Link 3
-                                </a>
-                            </li>
-                        </ul>
+                        <i class="fas fa-user-circle fa-fw"></i>
+                        <span>My Account</span>
+                        </a>
                     </li>
 
                     <hr class="text-gray-300 mx-3"/>
 
                     <li>
                         <a
-                        (click)="logout()"
-                        class="flex items-center gap-3 py-2 px-2.5 text-sm text-gray-800 bg-[var(--color-secondary)] rounded-lg hover:bg-neutral-200"
+                        href="/dashboard/admin/users"
+                        class="flex items-center gap-3 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-200"
                         >
+                        <i class="fas fa-users fa-fw"></i>
+                        <span>Users</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a
+                        href="/dashboard/admin/users"
+                        class="flex items-center gap-3 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-200"
+                        >
+                        <i class="fas fa-briefcase fa-fw"></i>
+                        <span>Employees</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a
+                        href="/dashboard/admin/properties"
+                        class="flex items-center gap-3 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-200"
+                        >
+                        <i class="fas fa-home fa-fw"></i>
+                        <span>Properties</span>
+                        </a>
+                    </li>
+
+
+                    <hr class="text-gray-300 mx-3"/>
+
+                    <li>
+                        <a
+                        (click)="logout()"
+                        class="flex items-center gap-3 py-2 px-2.5 text-sm text-gray-800 rounded-lg hover:bg-gray-200"                        >
                         <i class="fa fa-power-off" aria-hidden="true"></i>
                         <span>Logout</span>
                         </a>
                     </li>
+                    
                 </ul>
             </nav>
         </aside>
 
 
         <!-- 3. Main Content -->
-        <main class="flex-1 overflow-auto p-4 md:p-8 lg:p-12">
-        <!-- Card Section -->
-        <div class="max-w-[85rem] mx-auto">
-            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-
-                <!-- Card -->
-                <div class="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl">
-                <div class="p-4 md:p-5 flex gap-x-4">
-                    <div class="shrink-0 flex justify-center items-center size-11 bg-[var(--color-secondary-elevated)] rounded-lg">
-                        <i class="fa fa-users text-blue-600" aria-hidden="true"></i>
-                    </div>
-
-                    <div class="grow">
-                    <div class="flex items-center gap-x-2">
-                        <p class="text-xs uppercase text-gray-500">
-                        Total Users
-                        </p>
-                    </div>
-                    <div class="mt-1 flex items-center gap-x-2">
-                        <h3 class="text-xl font-medium">
-                        298
-                        </h3>
-                    </div>
-                    </div>
-                </div>
-                </div>
-                <!-- End Card -->
-
-                <!-- Card -->
-                <div class="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl">
-                <div class="p-4 md:p-5 flex gap-x-4">
-                    <div class="shrink-0 flex justify-center items-center size-11 bg-[var(--color-secondary-elevated)] rounded-lg">
-                        <i class="fa fa-home text-orange-400" aria-hidden="true"></i>
-                    </div>
-
-                    <div class="grow">
-                    <div class="flex items-center gap-x-2">
-                        <p class="text-xs uppercase text-gray-500">
-                        Available Properties 
-                        </p>
-                    </div>
-                    <div class="mt-1 flex items-center gap-x-2">
-                        <h3 class="text-xl font-medium">
-                        522
-                        </h3>
-                    </div>
-                    </div>
-                </div>
-                </div>
-                <!-- End Card -->
-
-                <!-- Card -->
-                <div class="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl">
-                <div class="p-4 md:p-5 flex gap-x-4">
-                    <div class="shrink-0 flex justify-center items-center size-11 bg-[var(--color-secondary-elevated)] rounded-lg">
-                        <i class="fa fa-check text-green-600" aria-hidden="true"></i>
-                    </div>
-
-                    <div class="grow">
-                    <div class="flex items-center gap-x-2">
-                        <p class="text-xs uppercase text-gray-500">
-                        Sold Properties 
-                        </p>
-                    </div>
-                    <div class="mt-1 flex items-center gap-x-2">
-                        <h3 class="text-xl font-medium">
-                        129
-                        </h3>
-                    </div>
-                    </div>
-                </div>
-                </div>
-                <!-- End Card -->
-
-                <!-- Card -->
-                <div class="flex flex-col bg-white border border-gray-200 shadow-2xs rounded-xl">
-                <div class="p-4 md:p-5 flex gap-x-4">
-                    <div class="shrink-0 flex justify-center items-center size-11 bg-[var(--color-secondary-elevated)] rounded-lg">
-                        <i class="fa fa-briefcase text-violet-600" aria-hidden="true"></i>
-                    </div>
-
-                    <div class="grow">
-                    <div class="flex items-center gap-x-2">
-                        <p class="text-xs uppercase text-gray-500">
-                        Total Employees
-                        </p>
-                    </div>
-                    <div class="mt-1 flex items-center gap-x-2">
-                        <h3 class="text-xl font-medium">
-                        298
-                        </h3>
-                    </div>
-                    </div>
-                </div>
-                </div>
-                <!-- End Card -->
-            </div>
-        </div>
+        <main class="flex-1 overflow-auto  md:p-5 lg:p-8">
+            <router-outlet/>
         </main>
 
     </div>

@@ -1,9 +1,1 @@
-export {};
-
-declare global {
-  interface Window {
-    HSStaticMethods: {
-      autoInit: () => void;
-    };
-  }
-}
+declare module 'aos';

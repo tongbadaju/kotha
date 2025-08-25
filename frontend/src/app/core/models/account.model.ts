@@ -15,3 +15,11 @@ export interface TokenRefreshResponse {
   access: string;
   refresh?: string;
 }
+
+export interface User {
+  id: number;
+  name: string;
+  phoneNumber: string;
+  lastLogin: string;
+  role: 'user' | 'employee' | 'admin';
+}

@@ -4,19 +4,21 @@ export interface PropertyImage {
 }
 
 export interface Property {
-  id?: number;
+  id: number;
   title: string;
   propertyType: string;
   description?: string;
-  district: string;
-  area: string;
-  address: string;
   bedrooms: number;
   bathrooms: number;
   kitchen: number;
+  district: string;
+  area: string;
+  address: string;
   price: number;
   availableFrom?: string;
   genderPreference: 'boys' | 'girls' | 'unisex';
+  isAvailable: boolean;
+  uploadedByName: string;
   createdAt?: string;
   updatedAt?: string;
   images: PropertyImage[];

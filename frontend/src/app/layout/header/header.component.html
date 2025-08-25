@@ -65,14 +65,11 @@
 
             <!-- Logged-in -->
             <ng-template #loggedInTpl>
-              <div
-                (click)="onAvatarClick()"
-                class="w-10 h-10 bg-[var(--color-primary)] rounded-full flex items-center justify-center cursor-pointer"
-                title="{{ currentUser?.name }}"
-              >
-                <span class="text-sm font-semibold text-white">
-                  {{ initials }}
-                </span>
+              <div *ngIf="currentUser?.role === 'admin' || currentUser?.role === 'employee'" class="text-sm cursor-pointer hover:text-[var(--color-primary)]" routerLink="/dashboard/admin">
+                My Dashboard
+              </div>
+              <div *ngIf="currentUser?.role === 'user'" class="text-sm cursor-pointer hover:text-[var(--color-primary)]" routerLink="/dashboard/user">
+                My Dashboard
               </div>
             </ng-template>
           </div>

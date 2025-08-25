@@ -47,65 +47,52 @@
 
 <!-- Property Cards -->
 <section class="flex flex-col items-center py-10 px-4 sm:px-6 lg:px-40">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 w-full">
-        <div *ngFor="let property of properties" [routerLink]="['/property/', property.id]"
-            class="bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-[1.02] overflow-hidden flex flex-col">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 w-full">
+    <div *ngFor="let property of visibleProperties" [routerLink]="['/property/', property.id]"
+      class="bg-white rounded-xl shadow-md hover:shadow-lg transition duration-300 transform hover:scale-[1.02] overflow-hidden flex flex-col">
+      
+      <!-- Image -->
+      <img 
+        [src]="property.images && property.images.length > 0 ? property.images[0].image : 'assets/images/thumbnails/kotha_logo.png'" 
+        alt="{{property.title}}" 
+        class="w-full h-56 sm:h-64 lg:h-72 object-cover" />
 
-            <!-- Image -->
-            <img 
-            [src]="property.images && property.images.length > 0 ? property.images[0].image : 'assets/images/thumbnails/kotha_logo.png'" 
-            alt="{{property.title}}" 
-            class="w-full h-56 sm:h-64 lg:h-72 object-cover" />
-
-            <!-- Card Content -->
-            <div class="p-4 flex flex-col flex-grow">
-                <h3 class="text-lg font-semibold text-gray-800 line-clamp-1">
-                {{ property.title }}
-                </h3>
-
-                <div class="text-xs text-gray-500 flex items-center gap-1 mt-1">
-                    <i class="fa-solid fa-location-dot text-gray-400"></i>
-                    <span class="truncate">{{ property.address }}, {{ property.area }}</span>
-                </div>
-
-                <p class="mt-5 text-[var(--color-primary)] font-semibold">
-                ₹ {{ property.price }} / month
-                </p>
-
-                <div class="mt-3">
-                    <span class="px-3 py-1 text-xs rounded-full font-medium"
-                        [ngClass]="{
-                        'bg-blue-100 text-blue-700': property.genderPreference  === 'boys',
-                        'bg-pink-100 text-pink-700': property.genderPreference  === 'girls',
-                        'bg-green-100 text-green-700': property.genderPreference  === 'unisex'
-                        }">
-                        {{ property.genderPreference | titlecase }}
-                    </span>
-                </div>
-
-            </div>
+      <!-- Card Content -->
+      <div class="p-4 flex flex-col flex-grow">
+        <h3 class="text-lg font-semibold text-gray-800 line-clamp-1">{{ property.title }}</h3>
+        <div class="text-xs text-gray-500 flex items-center gap-1 mt-1">
+          <i class="fa-solid fa-location-dot text-gray-400"></i>
+          <span class="truncate">{{ property.address }}, {{ property.area }}</span>
         </div>
+        <p class="mt-5 text-[var(--color-primary)] font-semibold">₹ {{ property.price }} / month</p>
+        <div class="mt-3">
+          <span class="px-3 py-1 text-xs rounded-full font-medium"
+            [ngClass]="{
+              'bg-blue-100 text-blue-700': property.genderPreference === 'boys',
+              'bg-pink-100 text-pink-700': property.genderPreference === 'girls',
+              'bg-green-100 text-green-700': property.genderPreference === 'unisex'
+            }">
+            {{ property.genderPreference | titlecase }}
+          </span>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Pagination -->
-    <nav class="flex items-center gap-x-1 mt-13" aria-label="Pagination">
-        <button type="button" class="min-h-9.5 min-w-9.5 py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none" aria-label="Previous">
-            <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m15 18-6-6 6-6"></path>
-            </svg>
-            <span>Previous</span>
-        </button>
-        <div class="flex items-center gap-x-1">
-            <button type="button" class="min-h-9.5 min-w-9.5 flex justify-center items-center text-gray-800 hover:bg-gray-200 py-2 px-3 text-sm rounded-lg focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none" aria-current="page">1</button>
-            <button type="button" class="min-h-9.5 min-w-9.5 flex justify-center items-center text-gray-800 hover:bg-gray-200 py-2 px-3 text-sm rounded-lg focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none">2</button>
-            <button type="button" class="min-h-9.5 min-w-9.5 flex justify-center items-center text-gray-800 hover:bg-gray-200 py-2 px-3 text-sm rounded-lg focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none">3</button>
-        </div>
-        <button type="button" class="min-h-9.5 min-w-9.5 py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-200 focus:outline-hidden focus:bg-gray-200 disabled:opacity-50 disabled:pointer-events-none" aria-label="Next">
-            <span>Next</span>
-            <svg class="shrink-0 size-3.5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="m9 18 6-6-6-6"></path>
-            </svg>
-        </button>
-    </nav>
+  <!-- View More Button -->
+  <div class="mt-10 transition flex flex-col items-center gap-3">
+    <p class="text-sm text-gray-600">
+      Showing <span class="font-semibold text-gray-800">{{ visibleProperties.length }}</span> of
+      <span class="font-semibold text-gray-800">{{ allProperties.length }}</span> properties
+    </p>
 
+    <button type="button" 
+      (click)="viewMore()" 
+      [disabled]="visibleProperties.length >= allProperties.length" 
+      class="flex items-center gap-1 px-3 py-1 bg-[var(--color-secondary)] text-gray-800 rounded-md hover:bg-gray-200 transition">
+      <i class="fa fa-caret-down" aria-hidden="true"></i>        
+      View More
+    </button>
+  </div>
 </section>
+

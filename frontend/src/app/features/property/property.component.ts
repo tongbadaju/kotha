@@ -11,8 +11,9 @@ import { Property } from '../../core/models/property.model';
   styleUrl: './property.component.scss'
 })
 export class PropertyComponent implements OnInit {
-  isGridView: boolean = true;
-  properties: Property[] = [];
+  allProperties: Property[] = [];
+  visibleProperties: Property[] = [];
+  visibleCount = 12;
 
   constructor(private publicService: PublicService) {}
 
@@ -23,7 +24,8 @@ export class PropertyComponent implements OnInit {
   loadProperties(): void {
     this.publicService.getProperties().subscribe({
       next: (data) => {
-        this.properties = data;
+        this.allProperties = data;
+        this.updateVisibleProperties();
       },
       error: (err) => {
         console.error('Error loading properties', err);
@@ -31,9 +33,16 @@ export class PropertyComponent implements OnInit {
     });
   }
 
-  // Sort / Filter / View methods
+  updateVisibleProperties(): void {
+    this.visibleProperties = this.allProperties.slice(0, this.visibleCount);
+  }
+
+  viewMore(): void {
+    this.visibleCount += 12;
+    this.updateVisibleProperties();
+  }
+
   openFilter(): void {
     console.log('Filter clicked');
   }
-
 }

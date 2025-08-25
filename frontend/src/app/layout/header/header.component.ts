@@ -13,6 +13,7 @@ import { AuthView, AuthComponent } from '../../features/auth/auth.component';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent{
+  isMenuOpen = false;
   showLogin: boolean = false;
   showRegister: boolean = false;
   currentUser: Account | null = null;
@@ -31,19 +32,8 @@ export class HeaderComponent{
     }
   }
 
-  get initials(): string {
-    if (!this.currentUser?.name) {
-      return '';
-    }
-    const parts = this.currentUser.name.trim().split(/\s+/);
-    return parts
-      .slice(0, 2)
-      .map(p => p.charAt(0).toUpperCase())
-      .join('');
-  }
-
-  onAvatarClick() {
-    this.logout();
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
   }
 
   openAuth(startView: AuthView) {

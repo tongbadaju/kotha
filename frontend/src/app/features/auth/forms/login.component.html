@@ -22,7 +22,7 @@
           type="tel"
           id="login-phone"
           formControlName="phone"
-          class="py-2.5 sm:py-3 px-4 w-full border rounded-lg bg-[var(--color-secondary)] focus:border-blue-500 focus:ring-blue-500"
+          class="py-2.5 sm:py-3 px-4 w-full border border-gray-300 rounded-lg bg-[var(--color-secondary)] sm:text-sm focus:outline-hidden focus:border-[var(--color-primary)] focus:ring-[var(--color-primary)]"
           [ngClass]="{ 'border-red-500': submitted && lf['phone'].invalid }"
         />
         <p *ngIf="submitted && lf['phone'].errors" class="text-xs text-red-600 mt-2">
@@ -49,7 +49,7 @@
           type="password"
           id="login-password"
           formControlName="password"
-          class="py-2.5 sm:py-3 px-4 w-full border rounded-lg bg-[var(--color-secondary)] focus:border-blue-500 focus:ring-blue-500"
+          class="py-2.5 sm:py-3 px-4 w-full border border-gray-300 rounded-lg bg-[var(--color-secondary)] sm:text-sm focus:outline-hidden focus:border-[var(--color-primary)] focus:ring-[var(--color-primary)]"
           [ngClass]="{ 'border-red-500': submitted && lf['password'].invalid }"
         />
         <p *ngIf="submitted && lf['password'].errors" class="text-xs text-red-600 mt-2">
