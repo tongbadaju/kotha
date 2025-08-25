@@ -10,10 +10,14 @@ class PropertyImageSerializer(serializers.ModelSerializer):
 
 class PropertySerializer(serializers.ModelSerializer):
     images = PropertyImageSerializer(many=True, read_only=True)
+    uploaded_by_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Property
         fields = '__all__'
-        read_only_fields = ('created_at', 'updated_at')
+        read_only_fields = ('created_at', 'updated_at', 'uploaded_by_name')
+
+    def get_uploaded_by_name(self, obj):
+        return obj.uploaded_by.name
 
 

@@ -1,5 +1,8 @@
 import os
 from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 def property_image_upload_path(instance, filename):
     # Store inside media/property_images/<property_id>/<filename>
@@ -51,6 +54,15 @@ class Property(models.Model):
     available_from = models.DateField(blank=True, null=True)
 
     gender_preference = models.CharField(max_length=10, choices=GENDER_PREFERENCE, default="unisex")
+    
+    is_available = models.BooleanField(default=True)
+
+    uploaded_by = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='uploaded_properties',
+        help_text="User who uploaded this property"
+    )
 
     # Meta
     created_at = models.DateTimeField(auto_now_add=True)

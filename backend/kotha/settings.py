@@ -18,7 +18,9 @@ SECRET_KEY = 'django-insecure-_ssq4!g32ion0&(8cp#13g=i&x-k_qzh&u5zj2o6%fsgn#q#@9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "localhost",
+]
 
 
 # Application definition
@@ -150,7 +152,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:4200",  # Angular dev server
+    "http://localhost:4200",
 ]
 
 SIMPLE_JWT = {
